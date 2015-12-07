@@ -1,52 +1,56 @@
-var Todo = require('./models/todo');
+var Shoepair = require('./models/shoepair');
 
-function getTodos(res){
-	Todo.find(function(err, todos) {
+function getShoepairs(res){
+	Shoepair.find(function(err, shoepairs) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 			if (err)
 				res.send(err)
 
-			res.json(todos); // return all todos in JSON format
+			res.json(shoepairs); // return all shoepairs in JSON format
 		});
 };
 
 module.exports = function(app) {
 
 	// api ---------------------------------------------------------------------
-	// get all todos
-	app.get('/api/todos', function(req, res) {
+	// get all shoepairs
+	app.get('/api/shoepairs', function(req, res) {
 
-		// use mongoose to get all todos in the database
-		getTodos(res);
+		// use mongoose to get all shoepairs in the database
+		getShoepairs(res);
 	});
 
-	// create todo and send back all todos after creation
-	app.post('/api/todos', function(req, res) {
+	// create shoepair and send back all shoepairs after creation
+	app.post('/api/shoepairs', function(req, res) {
 
-		// create a todo, information comes from AJAX request from Angular
-		Todo.create({
-			text : req.body.text,
-			done : false
-		}, function(err, todo) {
+		// create a shoepair, information comes from AJAX request from Angular
+		Shoepair.create({
+			name: req.body.name,
+//			description: req.body.description,
+//			acquisitionDate: new Date(),
+			// This could be made more sophisticated (to include the dates of the workouts, links to the workout etc.)
+//		  kilometresRun: 0,
+			done: false
+		}, function(err, shoepair) {
 			if (err)
 				res.send(err);
 
-			// get and return all the todos after you create another
-			getTodos(res);
+			// get and return all the shoepairs after you create another
+			getShoepairs(res);
 		});
 
 	});
 
-	// delete a todo
-	app.delete('/api/todos/:todo_id', function(req, res) {
-		Todo.remove({
-			_id : req.params.todo_id
-		}, function(err, todo) {
+	// delete a shoepair
+	app.delete('/api/shoepairs/:shoepair_id', function(req, res) {
+		Shoepair.remove({
+			_id : req.params.shoepair_id
+		}, function(err, shoepair) {
 			if (err)
 				res.send(err);
 
-			getTodos(res);
+			getShoepairs(res);
 		});
 	});
 

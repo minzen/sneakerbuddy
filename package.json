@@ -1,9 +1,9 @@
 {
-  "name"         : "node-todo",
-  "version"      : "0.0.0",
-  "description"  : "Simple todo application.",
+  "name"         : "sneakerbuddy",
+  "version"      : "0.0.1",
+  "description"  : "Application for tracking kilometres run on different pairs of running shoes",
   "main"         : "server.js",
-  "author"       : "Scotch",
+  "author"       : "Nebel",
   "dependencies" : {
     "express"         : "~4.6.1",
     "mongoose"        : "~3.8.13",
