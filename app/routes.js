@@ -27,10 +27,10 @@ module.exports = function(app) {
 		// create a shoepair, information comes from AJAX request from Angular
 		Shoepair.create({
 			name: req.body.name,
-//			description: req.body.description,
-//			acquisitionDate: new Date(),
+			description: req.body.description,
+			acquisitionDate: req.body.acquisitionDate,
 			// This could be made more sophisticated (to include the dates of the workouts, links to the workout etc.)
-//		  kilometresRun: 0,
+		  kilometresRun: req.body.kilometresRun,
 			done: false
 		}, function(err, shoepair) {
 			if (err)

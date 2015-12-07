@@ -10,7 +10,7 @@
 	<title>Sneakerbuddy App</title>
 
 	<!-- SCROLLS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><!-- load bootstrap -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
 		html 					{ overflow-y:scroll; }
@@ -20,7 +20,7 @@
 	</style>
 
 	<!-- SPELLS -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script><!-- load angular -->
 
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
 	<script src="js/services/shoepairs.js"></script> <!-- load our shoepair service -->
@@ -43,15 +43,15 @@
 				<!-- LOOP OVER THE SHOEPAIRS IN $scope.shoepairs -->
 				<div class="checkbox" ng-repeat="shoepair in shoepairs">
 					<label>
-						<input type="checkbox" ng-click="deleteShoepair(shoepair._id)"> {{ shoepair.name }}
+						<!-- TODO: Change this to select/show details of an item and add the deletion to another place -->
+						<input type="checkbox" ng-click="deleteShoepair(shoepair._id)"> Name: {{ shoepair.name }}, description: {{ shoepair.description}}, date of acquisition: {{ shoepair.acquisitionDate}}, kilometres run: {{ shoepair.kilometresRun }}
 					</label>
 				</div>
 
-<!--
 				<p class="text-center" ng-show="loading">
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
 				</p>
--->
+
 			</div>
 		</div>
 
@@ -63,8 +63,9 @@
 
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="formData.name">
-
-					</div>
+						<input type="text" class="form-control input-lg text-center" placeholder="Description" ng-model="formData.description">
+						<input type="text" class="form-control input-lg text-center" placeholder="Date of acquisition" ng-model="formData.acquisitionDate">
+						<input type="text" class="form-control input-lg text-center" placeholder="Kilometres run" ng-model="formData.kilometresRun">
 
 					<!-- createShoepair() WILL CREATE NEW SHOEPAIRS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createShoepair()">Add</button>
