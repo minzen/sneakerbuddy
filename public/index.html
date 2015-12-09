@@ -9,9 +9,12 @@
 
 	<title>Sneakerbuddy App</title>
 
-	<!-- SCROLLS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><!-- load bootstrap -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Light package of effect.css It is optional -->
+	<link rel="stylesheet" href="css/effect-light.min.css">
+	<link rel="stylesheet" href="css/quantumui.min.css">
 	<style>
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
@@ -19,9 +22,17 @@
 		#shoepair-form 	 			{ margin-bottom:50px; }
 	</style>
 
-	<!-- SPELLS -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script><!-- load angular -->
+	<!-- AngularJS -->
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/angular-sanitize.min.js"></script>
+	<script src="js/angular/angular-animate.min.js"></script>
 
+	<!-- QuantumUI -->
+	<script src="js/quantumui-all.min.js"></script>
+	<!-- Required for Datepicker Component -->
+<!--  <script src="js/moment.min.js"></script>	 -->
+
+	<!-- Own controllers and services -->
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
 	<script src="js/services/shoepairs.js"></script> <!-- load our shoepair service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
