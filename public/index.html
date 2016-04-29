@@ -5,81 +5,111 @@
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Sneakerbuddy App</title>
+	<title>SneakerBuddy App</title>
 
 	<!-- SCROLLS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
-		html 					{ overflow-y:scroll; }
-		body 					{ padding-top:50px; }
-		#shoepair-list 				{ margin-bottom:30px; }
-		#shoepair-form 	 			{ margin-bottom:50px; }
+	html 									{ overflow-y:scroll; }
+	body				 					{ padding-top:50px; }
+	#shoepair-list 				{ margin-bottom:30px; }
+	#shoepair-form 	 			{ margin-bottom:50px; }
 	</style>
 
 	<!-- SPELLS -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
-
-	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/shoepairs.js"></script> <!-- load our shoepair service -->
-	<script src="js/core.js"></script> <!-- load our main application -->
-
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="js/controllers/shoepair_controller.js"></script>
+	<script src="js/controllers/user_controller.js"></script>
+	<script src="js/services/shoepair_service.js"></script>
+	<script src="js/services/user_service.js"></script>
+	<script src="js/core.js"></script>
 </head>
-<!-- SET THE CONTROLLER -->
-<body ng-controller="mainController">
-	<div class="container">
 
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController>
+	<div class="container"">
 		<!-- HEADER AND SHOEPAIR COUNT -->
 		<div class="jumbotron text-center">
-			<h1>Shoes, shoes, shoes... <span class="label label-info">{{ shoepairs.length }}</span></h1>
+			<h1>Sneakers, running shoes, shoes... <span class="label label-info">{{ shoepairs.length }}</span></h1>
 		</div>
 
 		<!-- Shoepair LIST -->
-		<h2 class="text-center">Existing shoes (delete by checking an item)</h2>
-		<div id="shoepair-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+		<div>
+			<h2 class="text-center">Existing shoes (delete by checking an item)</h2>
+			<div id="shoepair-list" class="row">
+				<div class="col-sm-4 col-sm-offset-4">
 
-				<!-- LOOP OVER THE SHOEPAIRS IN $scope.shoepairs -->
-				<div class="checkbox" ng-repeat="shoepair in shoepairs">
-					<label>
-						<input type="checkbox" ng-click="deleteShoepair(shoepair._id)"
+					<!-- LOOP OVER THE SHOEPAIRS IN $scope.shoepairs -->
+					<div class="checkbox" ng-repeat="shoepair in shoepairs">
+						<label>
+							<input type="checkbox" ng-click="deleteShoepair(shoepair._id)"
 							ng-confirm-click="Are you certain you want to delete this pair of shoes?">
 							{{ shoepair.name }}, in use since
 							{{shoepair.acquisitionDate}},
 							{{shoepair.kilometresRun}} km
-					</label>
+						</label>
+					</div>
+				</div>
+			</div>
+				<h2 class="text-center">Add a new pair of shoes</h2>
+				<!-- FORM TO CREATE SHOEPAIRS -->
+				<div id="shoepair-form" class="row">
+					<div class="col-sm-8 col-sm-offset-2 text-center">
+						<form>
+							<div class="form-group">
+								<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+								<input type="text" class="form-control input-lg text-center"
+								placeholder="Name" ng-model="formData.name">
+								<input type="text" class="form-control input-lg text-center"
+								placeholder="Description" ng-model="formData.description">
+								<!-- TODO: Replace this with a date picker etc.-->
+								<input type="number" class="form-control input-lg text-center"
+								placeholder="Acquisition year" ng-model="formData.acquisitionDate" min="2000">
+								<input type="number" class="form-control input-lg text-center"
+								placeholder="Kilometres run" ng-model="formData.kilometresRun" min=0>
+							</div>
+							<!-- createShoepair() WILL CREATE NEW SHOEPAIRS -->
+							<button type="submit" class="btn btn-primary btn-lg" ng-click="createShoepair()">Add shoepair</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		<div>
+			<div class="container">
+			<h2 class="text-center">Existing users (delete by checking an item)</h2>
+			<div id="user-list" class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<div class="checkbox" ng-repeat="user in users">
+						<label>
+							<input type="checkbox" ng-click="deleteUser(user._id)"
+								ng-confirm-click="Are you certain you want to delete this user?">
+								{{ user.username }}
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="text-center">Add a new user</h2>
+			<div id="user-form" class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control input-lg text-center"
+							placeholder="UserName" ng-model="formData2.username">
+							<input type="password" class="form-control input-lg text-center"
+							placeholder="Password" ng-model="formData2.password">
+						</div>
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createUser()">Add user</button>
+					</form>
 				</div>
 			</div>
 		</div>
-
-
-		<h2 class="text-center">Add a new pair of shoes</h2>
-		<!-- FORM TO CREATE SHOEPAIRS -->
-		<div id="shoepair-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form>
-					<div class="form-group">
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center"
-							placeholder="Name" ng-model="formData.name">
-						<input type="text" class="form-control input-lg text-center"
-							placeholder="Description" ng-model="formData.description">
-						<!-- TODO: Replace this with a date picker etc.-->
-						<input type="number" class="form-control input-lg text-center"
-							placeholder="Acquisition year" ng-model="formData.acquisitionDate" min="2000">
-						<input type="number" class="form-control input-lg text-center"
-							placeholder="Kilometres run" ng-model="formData.kilometresRun" min=0 >
-					</div>
-
-					<!-- createShoepair() WILL CREATE NEW SHOEPAIRS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createShoepair()">Add</button>
-				</form>
-			</div>
-		</div>
-
 	</div>
+</div>
 
 </body>
 </html>

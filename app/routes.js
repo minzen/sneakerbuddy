@@ -1,4 +1,5 @@
 var Shoepair = require('./models/shoepair');
+var User = require('./models/user');
 
 function getShoepairs(res){
 	Shoepair.find(function(err, shoepairs) {
@@ -8,9 +9,22 @@ function getShoepairs(res){
 				res.send(err)
 
 			// Debug output to the log of each shoe pair
-			console.log(shoepairs);
+			console.log("getShoepairs()");
 			res.json(shoepairs); // return all shoepairs in JSON format
 		});
+};
+
+function getUsers(res) {
+	User.find(function(err, users) {
+		// If there is an error retreiving, send the error. nothing after res.send(err) will execute
+		if (err) {
+			res.send(err)
+		}
+
+		// Debug output to the log of each shoe pair
+		console.log("getUsers()");
+		res.json(users); // return all users in JSON format
+	});
 };
 
 module.exports = function(app) {
@@ -46,15 +60,50 @@ module.exports = function(app) {
 	// delete a shoepair
 	app.delete('/api/shoepairs/:shoepair_id', function(req, res) {
 
-
-
 		Shoepair.remove({
 			_id : req.params.shoepair_id
 		}, function(err, shoepair) {
+			if (err) {
+				res.send(err);
+			}
+
+			getShoepairs(res);
+		});
+	});
+
+	// Get users
+	app.get('/api/users', function(req, res) {
+		// use mongoose to get all shoepairs in the database
+		getUsers(res);
+	});
+
+	// create user and send back all users after creation
+	app.post('/api/users', function(req, res) {
+
+		// create a shoepair, information comes from AJAX request from Angular
+		User.create({
+			username: req.body.name,
+			password: req.body.description,
+			done: false
+		}, function(err, user) {
 			if (err)
 				res.send(err);
 
-			getShoepairs(res);
+			// get and return all the users after you create another
+			getUsers(res);
+		});
+	});
+
+	// delete a user
+	app.delete('/api/users/:user_id', function(req, res) {
+
+		User.remove({
+			_id : req.params.user_id
+		}, function(err, user) {
+			if (err)
+				res.send(err);
+
+			getUsers(res);
 		});
 	});
 
