@@ -1,7 +1,7 @@
 angular.module('shoepairController', [])
 
 	// inject the Shoepairs service factory into our controller
-	.controller('mainController', ['$scope','$http','Shoepairs', function($scope, $http, Shoepairs) {
+	.controller('shoepairController', ['$scope','$http','Shoepairs', function($scope, $http, Shoepairs) {
 		$scope.formData = {};
 		$scope.loading = true;
 

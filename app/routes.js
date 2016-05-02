@@ -5,8 +5,9 @@ function getShoepairs(res){
 	Shoepair.find(function(err, shoepairs) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-			if (err)
+			if (err) {
 				res.send(err)
+			}
 
 			// Debug output to the log of each shoe pair
 			console.log("getShoepairs()");
@@ -49,8 +50,9 @@ module.exports = function(app) {
 		  kilometresRun: req.body.kilometresRun,
 			done: false
 		}, function(err, shoepair) {
-			if (err)
+			if (err) {
 				res.send(err);
+			}
 
 			// get and return all the shoepairs after you create another
 			getShoepairs(res);
@@ -73,21 +75,23 @@ module.exports = function(app) {
 
 	// Get users
 	app.get('/api/users', function(req, res) {
-		// use mongoose to get all shoepairs in the database
+		// use mongoose to get all users in the database
 		getUsers(res);
 	});
 
 	// create user and send back all users after creation
 	app.post('/api/users', function(req, res) {
 
+		console.log(req.body);
 		// create a shoepair, information comes from AJAX request from Angular
 		User.create({
-			username: req.body.name,
-			password: req.body.description,
+			username: req.body.username,
+			password: req.body.password,
 			done: false
 		}, function(err, user) {
-			if (err)
+			if (err) {
 				res.send(err);
+			}
 
 			// get and return all the users after you create another
 			getUsers(res);
@@ -100,8 +104,9 @@ module.exports = function(app) {
 		User.remove({
 			_id : req.params.user_id
 		}, function(err, user) {
-			if (err)
+			if (err) {
 				res.send(err);
+			}
 
 			getUsers(res);
 		});

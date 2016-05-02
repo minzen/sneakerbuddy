@@ -1,9 +1,9 @@
 angular.module('userController', [])
 
 	// inject the Users service factory into our controller
-	.controller('mainController', ['$scope','$http','Users', function($scope, $http, Users) {
-		$scope.formData2 = {};
-		$scope.loading = true;
+	.controller('userController', ['$scope','$http','Users', function($scope, $http, Users) {
+		$scope.userFormData = {};
+		$scope.userLoading = true;
 
 		// GET =====================================================================
 		// when landing on the page, get all users and show them
@@ -11,7 +11,7 @@ angular.module('userController', [])
 		Users.get()
 			.success(function(data) {
 				$scope.users = data;
-				$scope.loading = false;
+				$scope.userLoading = false;
 			});
 
 		// CREATE ==================================================================
@@ -20,16 +20,16 @@ angular.module('userController', [])
 
 			// validate the formData to make sure that something is there
 			// if form is empty, nothing will happen
-			if ($scope.formData2.username != undefined) {
-				$scope.loading = true;
+			if ($scope.userFormData.username != undefined) {
+				$scope.userLoading = true;
 
 				// call the create function from our service (returns a promise object)
-				Users.create($scope.formData)
+				Users.create($scope.userFormData)
 
 					// if successful creation, call our get function to get all the new users
 					.success(function(data) {
-						$scope.loading = false;
-						$scope.formData2 = {}; // clear the form so our user is ready to enter another
+						$scope.userLoading = false;
+						$scope.userFormData = {}; // clear the form so our user is ready to enter another
 						$scope.users = data; // assign our new list of users
 					});
 			}
@@ -38,12 +38,12 @@ angular.module('userController', [])
 		// DELETE ==================================================================
 		// delete a user after checking it
 		$scope.deleteUser = function(id) {
-			$scope.loading = true;
+			$scope.userLoading = true;
 
 			Users.delete(id)
 				// if successful creation, call our get function to get all the new users
 				.success(function(data) {
-					$scope.loading = false;
+					$scope.userLoading = false;
 					$scope.users = data; // assign our new list of users
 				});
 		};

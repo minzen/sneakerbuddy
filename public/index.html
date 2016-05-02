@@ -17,6 +17,8 @@
 	body				 					{ padding-top:50px; }
 	#shoepair-list 				{ margin-bottom:30px; }
 	#shoepair-form 	 			{ margin-bottom:50px; }
+	#user-list 						{ margin-bottom:30px; }
+	#user-form 			 			{ margin-bottom:50px; }
 	</style>
 
 	<!-- SPELLS -->
@@ -29,7 +31,7 @@
 </head>
 
 <!-- SET THE CONTROLLER -->
-<body ng-controller="mainController>
+<body>
 	<div class="container"">
 		<!-- HEADER AND SHOEPAIR COUNT -->
 		<div class="jumbotron text-center">
@@ -37,7 +39,7 @@
 		</div>
 
 		<!-- Shoepair LIST -->
-		<div>
+		<div ng-controller="shoepairController">
 			<h2 class="text-center">Existing shoes (delete by checking an item)</h2>
 			<div id="shoepair-list" class="row">
 				<div class="col-sm-4 col-sm-offset-4">
@@ -78,7 +80,7 @@
 				</div>
 			</div>
 
-		<div>
+		<div ng-controller="userController">
 			<div class="container">
 			<h2 class="text-center">Existing users (delete by checking an item)</h2>
 			<div id="user-list" class="row">
@@ -99,9 +101,9 @@
 					<form>
 						<div class="form-group">
 							<input type="text" class="form-control input-lg text-center"
-							placeholder="UserName" ng-model="formData2.username">
+							placeholder="UserName" name="username" ng-model="userFormData.username">
 							<input type="password" class="form-control input-lg text-center"
-							placeholder="Password" ng-model="formData2.password">
+							placeholder="Password" name="password" ng-model="userFormData.password">
 						</div>
 						<button type="submit" class="btn btn-primary btn-lg" ng-click="createUser()">Add user</button>
 					</form>
