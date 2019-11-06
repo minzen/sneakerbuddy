@@ -1,14 +1,14 @@
 {
-  "name"         : "sneakerbuddy",
-  "version"      : "0.0.1",
-  "description"  : "Application for tracking kilometres run on different pairs of running shoes",
-  "main"         : "server.js",
-  "author"       : "Nebel",
-  "dependencies" : {
-    "express"         : "~4.6.1",
-    "mongoose"        : "~3.8.21",
-    "morgan"          : "~1.1.1",
-    "body-parser"     : "~1.4.3",
-    "method-override" : "~2.1.1"
+  "name": "sneakerbuddy",
+  "version": "0.0.1",
+  "description": "Application for tracking kilometres run on different pairs of running shoes",
+  "main": "server.js",
+  "author": "Nebel",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "method-override": "~2.1.1",
+    "mongoose": "~3.8.21",
+    "morgan": "^1.9.1"
   }
 }
